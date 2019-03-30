@@ -3,17 +3,46 @@
 # !!!   DO NOT MODIFY THIS FILE BY YOURSELF   !!!
 # -----------------------------------------------
 
-"""返却値の `String`が対象 高付加 & レスポンスが遅い!!"""
+input AddTask {
+  """Task のタイトル, 概要"""
+  title: String!
+
+  """Task 補足やメモ"""
+  body: String
+}
+
+input DeleteTask {
+  """***対象id***"""
+  id: Int!
+}
+
+"""返却値の`String`が対象 高付加 & レスポンスが遅いので利用は計画的に!!"""
 input FreeWord {
   """`xxx like %txt%` になる  `txt: ""` で全件取得"""
   txt: String!
 }
 
-type Query {
-  """タスクを取得する"""
-  getTask(TaskParams: TaskParams!): Task!
+input GetTask {
+  """***対象id***"""
+  id: Int!
+}
 
-  """タスクを取得する"""
+type Mutation {
+  """タククを1件追加"""
+  addTask(AddTask: AddTask!): Task!
+
+  """タスクを1件更新"""
+  updateTask(UpdateTask: UpdateTask!): Task!
+
+  """タスクを1件論理削除"""
+  deleteTask(DeleteTask: DeleteTask!): Boolean!
+}
+
+type Query {
+  """タスクの取得"""
+  getTask(GetTask: GetTask!): Task!
+
+  """複数タスクの取得"""
   getTasks(FreeWord: FreeWord!): [Task!]!
 }
 
@@ -28,14 +57,13 @@ type Task {
   body: String!
 }
 
-input TaskParams {
+input UpdateTask {
+  """***対象id***"""
   id: Int!
-}
 
-input TasksParams {
   """Task のタイトル, 概要"""
   title: String!
 
   """Task 補足やメモ"""
-  body: String!
+  body: String
 }
