@@ -55,9 +55,6 @@ type Task {
 
   """Task 補足やメモ"""
   body: String!
-
-  """論理削除日時"""
-  deleteAt: String!
 }
 
 input UpdateTask {
