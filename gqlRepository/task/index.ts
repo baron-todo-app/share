@@ -3,11 +3,11 @@
  * サーバは、単体テストで利用
  * フロントは、処理で利用
  *
- * あくまで 基本的なクエリの一覧のため 必要に応じてカスタマイズする事もある
+ * あくまで 基本的なクエリの一覧のため 必要に応じてカスタマイズしたGQLを個別に発行することもある
  *
  */
 
-import { FreeWord, Task, GetTask, AddTask, DeleteTask, UpdateTask } from 'share/graphql.type';
+import { FreeWord, Task, GetTask, AddTask, DeleteTask, UpdateTask } from '../../graphql.type';
 import gql from 'graphql-tag';
 
 export { getTasksQ, getTaskQ, addTaskQ, deleteTaskQ, updateTaskQ };
