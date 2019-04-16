@@ -12,6 +12,9 @@ export const entity = {
 export const dto = {
   task: {
     input: {
+      title: {
+        ...entity.todo.title,
+      },
       body: {
         ...entity.todo.body,
       },
