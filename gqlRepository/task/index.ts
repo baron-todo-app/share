@@ -23,7 +23,6 @@ export {
   addTaskQ,
   deleteTaskQ,
   updateTaskQ,
-  updateTaskGQLTxt,
 };
 
 const rDefault: Array<keyof Task> = ['id', 'title', 'body'];
@@ -74,16 +73,6 @@ function updateTaskQ(p: UpdateTask, r: Array<keyof Task> = rDefault) {
           updateTask(UpdateTask: {id: ${p.id} title: "${p.title}"  body: "${p.body}" })  {
               ${r.join(' ')}
           }
-      }
-  `;
-}
-
-function updateTaskGQLTxt(p: UpdateTask, r: Array<keyof Task> = rDefault) {
-  return `
-      mutation {
-        updateTask(UpdateTask: {id: ${p.id} title: "${p.title}"  body: "${p.body}" })  {
-          ${r.join(' ')}
-        }
       }
   `;
 }
