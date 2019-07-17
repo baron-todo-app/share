@@ -1,0 +1,48 @@
+@startuml
+' 影をなくす
+skinparam shadowing false
+
+
+cloud "DB server" {
+  package "docker" {
+    database "MariaDB"
+  }
+}
+
+cloud "API server" {
+  file "scheme.gql" as gqlScheme
+  (GQL用 endpoint) as Endpoint
+
+  package "NestJS" {
+    [GQL Library]
+    [TypeORM Library]
+    file "DTO.ts" as DTO
+
+    package "GQL" {
+      file "resolvers.ts" as resolvers
+      file "mutations.ts" as mutations
+    }
+
+  }
+}
+
+cloud "Front" {
+  package "SPA" {
+    [react]
+  }
+}
+
+gqlScheme -d- GQL : 振る舞い
+gqlScheme -d-> DTO : generate
+[TypeORM Library] -- GQL : データ
+
+[TypeORM Library] -u-> [MariaDB] :generate
+[TypeORM Library] -u-> [MariaDB] :DML
+
+GQL -d- [GQL Library]: 束ねる
+[GQL Library] -d-> Endpoint
+
+Endpoint -d-> SPA :response
+SPA --> Endpoint :query, mutation
+
+@enduml
