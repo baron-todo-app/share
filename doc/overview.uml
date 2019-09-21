@@ -5,7 +5,7 @@ skinparam shadowing false
 
 cloud "DB server" {
   package "docker" {
-    database "MariaDB"
+    database "mysql"
   }
 }
 
@@ -36,8 +36,8 @@ gqlScheme -d- GQL : 振る舞い
 gqlScheme -d-> DTO : generate
 [TypeORM Library] -- GQL : データ
 
-[TypeORM Library] -u-> [MariaDB] :generate
-[TypeORM Library] -u-> [MariaDB] :DML
+[TypeORM Library] -u-> [mysql] :generate
+[TypeORM Library] -u-> [mysql] :DML
 
 GQL -d- [GQL Library]: 束ねる
 [GQL Library] -d-> Endpoint
